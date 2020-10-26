@@ -1,4 +1,5 @@
 const path = require('path');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './src/index.ts',
@@ -13,10 +14,33 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: [ '.tsx', '.ts', '.js' ],
+    extensions: ['.tsx', '.ts', '.js'],
   },
   output: {
     filename: 'game.js',
     path: path.resolve(__dirname, 'build'),
   },
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000,
+  },
+  externals: [
+    {
+      "pixi.js": "PIXI"
+    },
+  ],
+  plugins: [
+    new CopyPlugin({
+      patterns: [
+        {
+          from: 'node_modules/pixi.js/dist/pixi.min.js',
+          to: 'lib',
+        },
+      ],
+      options: {
+        concurrency: 100,
+      },
+    }),
+  ],
 };
