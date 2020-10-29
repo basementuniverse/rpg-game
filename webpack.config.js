@@ -25,22 +25,6 @@ module.exports = {
     maxEntrypointSize: 512000,
     maxAssetSize: 512000,
   },
-  externals: [
-    {
-      "pixi.js": "PIXI"
-    },
-  ],
-  plugins: [
-    new CopyPlugin({
-      patterns: [
-        {
-          from: 'node_modules/pixi.js/dist/pixi.min.js',
-          to: 'lib',
-        },
-      ],
-      options: {
-        concurrency: 100,
-      },
-    }),
-  ],
+  externals: [],
+  plugins: [],
 };

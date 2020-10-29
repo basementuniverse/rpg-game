@@ -18,7 +18,7 @@
   "homepage": "https://github.com/basementuniverse/rpg-game#readme",
   "dependencies": {
     "@basementuniverse/commonjs": "^1.2.6",
-    "pixi.js": "^5.3.3"
+    "shader-canvas": "^0.8.3"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^6.2.1",

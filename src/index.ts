@@ -1,4 +1,6 @@
 import Game from './Game';
 
-const game = new Game(document.querySelector('.main-container'));
-game.initialise();
+window.onload = () => {
+  const game = new Game(document.querySelector('#game'));
+  game.initialise();
+};
