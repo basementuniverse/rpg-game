@@ -1,4 +1,5 @@
 {
   "title": "RPG Game",
-  "scaleFactor": 2
+  "scaleFactor": 2,
+  "showFPS": true
 }
