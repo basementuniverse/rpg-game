@@ -124,20 +124,22 @@ export default class Debug {
   /**
    * Render debug values and markers onto the context
    * @param context The rendering context
-   * @param width The width of the screen
    */
-  public static draw(context: CanvasRenderingContext2D, width: number): void {
+  public static draw(context: CanvasRenderingContext2D): void {
     const debug = Debug.getInstance();
-    context.save();
 
     // Draw world-space markers
+    context.save();
+    context.scale(1 / config.scaleFactor, 1 / config.scaleFactor);
     debug.markers.forEach(marker => {
       if (marker.space === 'world') {
         debug.drawMarker(context, marker);
       }
     });
+    context.restore();
 
     // Draw values and screen-space markers
+    context.save();
     context.setTransform(1, 0, 0, 1, 0, 0);
     let position: vec;
     let leftY = debug.options.margin;
@@ -150,7 +152,7 @@ export default class Debug {
           leftY += lineHeight;
           break;
         case 'right':
-          position = vec(width - debug.options.margin, rightY);
+          position = vec(context.canvas.clientWidth - debug.options.margin, rightY);
           rightY += lineHeight;
           break;
       }
@@ -170,18 +172,15 @@ export default class Debug {
         debug.drawMarker(context, marker);
       }
     });
+    context.restore();
 
     // Clear values and markers ready for next frame
     debug.values.clear();
     debug.markers.clear();
-    context.restore();
   }
 
   private drawMarker(context: CanvasRenderingContext2D, marker: DebugMarker): void {
     context.save();
-    if (marker.space === 'world') {
-      context.scale(1 / config.scaleFactor, 1 / config.scaleFactor);
-    }
     const position = vec.mul(marker.position ?? vec(), config.scaleFactor);
     if (marker.showLabel || marker.showValue) {
       this.drawLabel(
