@@ -76,7 +76,7 @@ export default class Debug {
   }
 
   /**
-   * Initialise the debug instance
+   * Initialise the debug renderer for displaying values and markers
    * @param options Rendering options
    */
   public static initialise(options: Partial<DebugOptions> = {}): void {

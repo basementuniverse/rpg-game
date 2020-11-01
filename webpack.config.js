@@ -25,6 +25,22 @@ module.exports = {
     maxEntrypointSize: 512000,
     maxAssetSize: 512000,
   },
-  externals: [],
-  plugins: [],
+  externals: [
+    {
+      "hammerjs": "Hammer"
+    },
+  ],
+  plugins: [
+    new CopyPlugin({
+      patterns: [
+        {
+          from: 'node_modules/hammerjs/hammer.min.js',
+          to: 'lib',
+        },
+      ],
+      options: {
+        concurrency: 100,
+      },
+    }),
+  ],
 };

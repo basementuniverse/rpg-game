@@ -1,6 +1,7 @@
 import * as config from './config.json';
 import * as constants from './constants';
 import Debug from './Debug';
+import InputManager from './InputManager';
 import StateManager from './StateManager';
 
 export default class Game {
@@ -13,6 +14,10 @@ export default class Game {
 
   public stateManager: StateManager;
 
+  /**
+   * Create a new game
+   * @param container The canvas in which the game should be rendered
+   */
   constructor(container: HTMLElement | null) {
     if (container === null) {
       throw new Error('A valid container element must be specified.');
@@ -36,6 +41,7 @@ export default class Game {
 
     // Initialise subsystems...
     Debug.initialise();
+    InputManager.initialise(this.canvas);
     this.stateManager = new StateManager();
   }
 
@@ -47,6 +53,9 @@ export default class Game {
     this.context.imageSmoothingEnabled = false;
   }
 
+  /**
+   * Initialise the game and start playing
+   */
   public initialise(): void {
 
     // Load content assets and push loading state
@@ -80,6 +89,7 @@ export default class Game {
   }
 
   private update(dt: number): void {
+    InputManager.update();
     this.stateManager.update(dt);
   }
 
