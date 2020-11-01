@@ -2,7 +2,6 @@ import * as config from './config.json';
 import * as constants from './constants';
 import Debug from './Debug';
 import StateManager from './StateManager';
-import { vec } from '@basementuniverse/commonjs';
 
 export default class Game {
   private canvas: HTMLCanvasElement;
@@ -11,11 +10,6 @@ export default class Game {
   private lastFrameCountTime: number;
   private frameRate: number = 0;
   private frameCount: number = 0;
-
-  // TEST
-  private testImage: HTMLImageElement;
-  private testOffset: number = 0;
-  private testTime: number = 0;
 
   public stateManager: StateManager;
 
@@ -42,6 +36,7 @@ export default class Game {
 
     // Initialise subsystems...
     Debug.initialise();
+    this.stateManager = new StateManager();
   }
 
   private resize(): void {
@@ -55,10 +50,7 @@ export default class Game {
   public initialise(): void {
 
     // Load content assets and push loading state
-
-    // TEST
-    this.testImage = new Image();
-    this.testImage.src = '../images/error.png';
+    // ...
 
     // Start the game loop
     this.lastFrameTime = this.lastFrameCountTime = performance.now();
@@ -78,7 +70,7 @@ export default class Game {
     this.frameCount++;
     this.lastFrameTime = now;
     if (config.showFPS) {
-      Debug.value('FPS', this.frameRate);
+      Debug.value('FPS', this.frameRate, { align: 'right' });
     }
 
     // Do game loop
@@ -88,28 +80,13 @@ export default class Game {
   }
 
   private update(dt: number): void {
-    // TEST
-    this.testTime += dt;
-    this.testOffset = Math.sin(this.testTime / 10) * 100;
-    Debug.marker('world', this.testTime, vec(30, 30));
-    Debug.marker('screen', 'hello!', vec(100, 100), {
-      showLabel: false,
-      space: 'screen',
-      markerStyle: '+'
-    });
-    Debug.marker('screen2', 'hello2!', vec(100, 130), {
-      space: 'screen',
-      markerStyle: '.'
-    });
+    this.stateManager.update(dt);
   }
 
   private draw(): void {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-    // TEST
-    this.context.setTransform(config.scaleFactor, 0, 0, config.scaleFactor, 100 + this.testOffset, 100);
-    this.context.drawImage(this.testImage, 0, 0);
-
-    Debug.draw(this.context, this.canvas.width);
+    this.context.setTransform(config.scaleFactor, 0, 0, config.scaleFactor, 0, 0);
+    this.stateManager.draw(this.context);
+    Debug.draw(this.context);
   }
 }
