@@ -18,14 +18,12 @@
   },
   "homepage": "https://github.com/basementuniverse/rpg-game#readme",
   "dependencies": {
-    "@basementuniverse/commonjs": "^1.2.7",
-    "@types/hammerjs": "^2.0.36",
-    "hammerjs": "^2.0.8",
+    "@basementuniverse/commonjs": "^1.2.8",
     "shader-canvas": "^0.8.3"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.6.0",
-    "@typescript-eslint/parser": "^4.6.0",
+    "@typescript-eslint/eslint-plugin": "^4.6.1",
+    "@typescript-eslint/parser": "^4.6.1",
     "copy-webpack-plugin": "^6.2.1",
     "eslint": "^7.12.1",
     "ts-loader": "^8.0.7",

@@ -89,8 +89,8 @@ export default class Game {
   }
 
   private update(dt: number): void {
-    InputManager.update();
     this.stateManager.update(dt);
+    InputManager.update();
   }
 
   private draw(): void {
