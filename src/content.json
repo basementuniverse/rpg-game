@@ -1,0 +1,9 @@
+{
+  "items": [
+    {
+			"name": "logo",
+			"loader": "image",
+			"args": ["images/logo.png"]
+		}
+  ]
+}
