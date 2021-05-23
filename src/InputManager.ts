@@ -19,29 +19,29 @@ export default class InputManager {
   private previousMouseState: MouseState = { button: false, position: vec(), wheel: 0 };
 
   private constructor(canvas: HTMLCanvasElement) {
-    window.addEventListener('mousedown', () => {
+    canvas.addEventListener('mousedown', () => {
       this.mouseState.button = true;
     });
-    window.addEventListener('mouseup', () => {
+    canvas.addEventListener('mouseup', () => {
       this.mouseState.button = false;
     });
-    window.addEventListener('touchstart', () => {
+    canvas.addEventListener('touchstart', () => {
       this.mouseState.button = true;
     });
-    window.addEventListener('touchend', () => {
+    canvas.addEventListener('touchend', () => {
       this.mouseState.button = false;
     });
-    window.addEventListener('mousemove', e => {
+    canvas.addEventListener('mousemove', e => {
       this.mouseState.position.x = e.offsetX;
       this.mouseState.position.y = e.offsetY;
     });
-    window.addEventListener('keydown', e => {
+    canvas.addEventListener('keydown', e => {
       this.keyboardState[e.code as Key] = true;
     });
-    window.addEventListener('keyup', e => {
+    canvas.addEventListener('keyup', e => {
       this.keyboardState[e.code as Key] = false;
     });
-    window.addEventListener('wheel', e => {
+    canvas.addEventListener('wheel', e => {
       this.mouseState.wheel = e.deltaY > 0 ? 1 : -1;
     });
   }
@@ -83,7 +83,7 @@ export default class InputManager {
 
     // Check if any key is down
     if (key == null) {
-      for (let k in input.keyboardState) {
+      for (const k in input.keyboardState) {
         if (input.keyboardState[k as Key]) {
           return true;
         }
@@ -102,7 +102,7 @@ export default class InputManager {
 
     // Check if any key was pressed
     if (key == null) {
-      for (let k in input.keyboardState) {
+      for (const k in input.keyboardState) {
         if (
           input.keyboardState[k as Key] &&
           (
@@ -127,7 +127,7 @@ export default class InputManager {
 
     // Check if any key was released
     if (key == null) {
-      for (let k in input.keyboardState) {
+      for (const k in input.keyboardState) {
         if (
           !input.keyboardState[k as Key] &&
           !!input.previousKeyboardState[k as Key]
