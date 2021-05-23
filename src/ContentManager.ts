@@ -1,3 +1,5 @@
+import * as content from '../content/content.json';
+
 type ContentItem = {
   name: string,
   loader: string,

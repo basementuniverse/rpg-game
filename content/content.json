@@ -1,0 +1,24 @@
+{
+  "items": [
+    {
+			"name": "logo",
+			"loader": "image",
+			"args": ["images/logo.png"]
+    },
+    {
+      "name": "testfont",
+      "loader": "font",
+      "args": ["fonts/aniron.ttf"]
+    },
+    {
+      "name": "testdata",
+      "loader": "json",
+      "args": ["testdata1.json"]
+    },
+    {
+      "name": "testsound",
+      "loader": "audio",
+      "args": ["sounds/blip1.wav"]
+    }
+  ]
+}

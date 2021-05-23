@@ -1,5 +1,6 @@
 import * as config from './config.json';
 import * as constants from './constants';
+import ContentManager from './ContentManager';
 import Debug from './Debug';
 import InputManager from './InputManager';
 import StateManager from './StateManager';
@@ -43,6 +44,9 @@ export default class Game {
     Debug.initialise();
     InputManager.initialise(this.canvas);
     this.stateManager = new StateManager();
+
+    // TEST
+    // ContentManager.test();
   }
 
   private resize(): void {
