@@ -5,9 +5,10 @@
   "scripts": {
     "lint": "npx eslint src/**/* --ext .js,.jsx,.ts,.tsx",
     "build": "webpack",
-    "start": "http-server -a localhost -p 8080 -o index.html"
+    "start": "http-server -a localhost -p 8080 -o index.html",
+    "test": ""
   },
-  "author": "",
+  "author": "Gordon Larrigan <gordonlarrigan@gmail.com> (https://gordonlarrigan.com)",
   "license": "MIT",
   "repository": {
     "type": "git",

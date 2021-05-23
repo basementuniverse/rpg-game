@@ -1,5 +1,8 @@
-node_modules
-coverage
-build
-resources
+/.kanbn
+/.vscode
+/build
+/content
+/node_modules
+/resources
 .eslintrc.js
+webpack.config.js
