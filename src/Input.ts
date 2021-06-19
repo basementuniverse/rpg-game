@@ -11,8 +11,8 @@ type KeyboardState = {
   [key in Key]?: boolean
 };
 
-export default class InputManager {
-  private static instance: InputManager;
+export default class Input {
+  private static instance: Input;
   private keyboardState: KeyboardState = {};
   private previousKeyboardState: KeyboardState = {};
   private mouseState: MouseState = { button: false, position: vec(), wheel: 0 };
@@ -51,21 +51,21 @@ export default class InputManager {
    * @param canvas The game canvas
    */
   public static initialise(canvas: HTMLCanvasElement): void {
-    InputManager.instance = new InputManager(canvas);
+    Input.instance = new Input(canvas);
   }
 
-  private static getInstance(): InputManager {
-    if (InputManager.instance == null) {
+  private static getInstance(): Input {
+    if (Input.instance == null) {
       throw new Error('Input manager not properly initialised');
     }
-    return InputManager.instance;
+    return Input.instance;
   }
 
   /**
    * Update the state of the input devices
    */
   public static update(): void {
-    const input = InputManager.getInstance();
+    const input = Input.getInstance();
     input.previousKeyboardState = Object.assign({}, input.keyboardState);
     input.previousMouseState = {
       button: input.mouseState.button,
@@ -79,7 +79,7 @@ export default class InputManager {
    * @param key The key to check, or any key if not specified
    */
   public static keyDown(key?: Key): boolean {
-    const input = InputManager.getInstance();
+    const input = Input.getInstance();
 
     // Check if any key is down
     if (key == null) {
@@ -98,7 +98,7 @@ export default class InputManager {
    * @param key The key to check, or any key if not specified
    */
   public static keyPressed(key?: Key): boolean {
-    const input = InputManager.getInstance();
+    const input = Input.getInstance();
 
     // Check if any key was pressed
     if (key == null) {
@@ -123,7 +123,7 @@ export default class InputManager {
    * @param key The key to check, or any key if not specified
    */
   public static keyReleased(key?: Key): boolean {
-    const input = InputManager.getInstance();
+    const input = Input.getInstance();
 
     // Check if any key was released
     if (key == null) {
@@ -144,7 +144,7 @@ export default class InputManager {
    * Check if a mouse button is currently pressed down
    */
   public static mouseDown(): boolean {
-    const input = InputManager.getInstance();
+    const input = Input.getInstance();
     return !!input.mouseState.button;
   }
 
@@ -152,7 +152,7 @@ export default class InputManager {
    * Check if a mouse button has been pressed since the last frame
    */
   public static mousePressed(): boolean {
-    const input = InputManager.getInstance();
+    const input = Input.getInstance();
     return !!input.mouseState.button && !input.previousMouseState.button;
   }
 
@@ -160,7 +160,7 @@ export default class InputManager {
    * Check if a mouse button has been released since the last frame
    */
   public static mouseReleased(): boolean {
-    const input = InputManager.getInstance();
+    const input = Input.getInstance();
     return !input.mouseState.button && !!input.previousMouseState.button;
   }
 
@@ -168,7 +168,7 @@ export default class InputManager {
    * Check if the mousewheel is scrolling up
    */
   public static mouseWheelUp(): boolean {
-    const input = InputManager.getInstance();
+    const input = Input.getInstance();
     return input.mouseState.wheel > 0;
   }
 
@@ -176,7 +176,7 @@ export default class InputManager {
    * Check if the mousewheel is scrolling down
    */
   public static mouseWheelDown(): boolean {
-    const input = InputManager.getInstance();
+    const input = Input.getInstance();
     return input.mouseState.wheel < 0;
   }
 
@@ -184,7 +184,7 @@ export default class InputManager {
    * Get the current mouse position in screen-space
    */
   public static mousePosition(): vec {
-    const input = InputManager.getInstance();
+    const input = Input.getInstance();
     return input.mouseState.position;
   }
 }

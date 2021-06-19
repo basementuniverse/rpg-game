@@ -1,6 +1,5 @@
 import StateManager from './StateManager';
-import { StateTransitionType } from './enums';
-import {} from '@basementuniverse/commonjs';
+import { StateTransitionType } from '../enums';
 
 export type StateOptions = {
   transitionTime: number,

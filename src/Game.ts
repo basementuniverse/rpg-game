@@ -1,9 +1,9 @@
 import * as config from './config.json';
 import * as constants from './constants';
-import ContentManager from './ContentManager';
+// import Content from './Content';
 import Debug from './Debug';
-import InputManager from './InputManager';
-import StateManager from './StateManager';
+import Input from './Input';
+import StateManager from './states/StateManager';
 
 export default class Game {
   private canvas: HTMLCanvasElement;
@@ -40,13 +40,10 @@ export default class Game {
     window.addEventListener('resize', this.resize.bind(this), false);
     this.resize();
 
-    // Initialise subsystems...
+    // Initialise subsystems
     Debug.initialise();
-    InputManager.initialise(this.canvas);
+    Input.initialise(this.canvas);
     this.stateManager = new StateManager();
-
-    // TEST
-    // ContentManager.test();
   }
 
   private resize(): void {
@@ -61,11 +58,6 @@ export default class Game {
    * Initialise the game and start playing
    */
   public initialise(): void {
-
-    // Load content assets and push loading state
-    // ...
-
-    // Start the game loop
     this.lastFrameTime = this.lastFrameCountTime = performance.now();
     this.loop();
   }
@@ -94,7 +86,7 @@ export default class Game {
 
   private update(dt: number): void {
     this.stateManager.update(dt);
-    InputManager.update();
+    Input.update();
   }
 
   private draw(): void {

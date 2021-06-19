@@ -1,0 +1,16 @@
+.kanbn-column-todo .kanbn-column-task-list {
+  border-color: #36d;
+}
+
+.kanbn-column-in-progress .kanbn-column-task-list {
+  border-color: #eb1;
+}
+
+.kanbn-task-data-created,
+.kanbn-task-data-updated,
+.kanbn-task-data-started,
+.kanbn-task-data-due,
+.kanbn-task-data-completed,
+.kanbn-task-data-workload {
+  display: none;
+}

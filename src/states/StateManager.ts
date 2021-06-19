@@ -1,5 +1,5 @@
 import { State } from './State';
-import { StateTransitionType } from './enums';
+import { StateTransitionType } from '../enums';
 
 export default class StateManager {
   private states: State[] = [];

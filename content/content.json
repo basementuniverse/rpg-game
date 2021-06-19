@@ -11,9 +11,19 @@
       "args": ["fonts/aniron.ttf"]
     },
     {
-      "name": "testdata",
+      "name": "testdata1",
       "loader": "json",
-      "args": ["testdata1.json"]
+      "args": ["json/testdata1.json"]
+    },
+    {
+      "name": "testdata2",
+      "loader": "json",
+      "args": ["json/testdata2.json"]
+    },
+    {
+      "name": "testdata3",
+      "loader": "json",
+      "args": ["json/testdata3.json"]
     },
     {
       "name": "testsound",
