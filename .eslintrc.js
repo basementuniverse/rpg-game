@@ -4,11 +4,11 @@ module.exports = {
   parserOptions: {
     tsconfigRootDir: __dirname,
     project: [
-      './tsconfig.json'
+      './tsconfig.json',
     ],
   },
   plugins: [
-    '@typescript-eslint'
+    '@typescript-eslint',
   ],
   extends: [
     'eslint:recommended',
@@ -16,26 +16,45 @@ module.exports = {
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
   ],
   rules: {
-    "@typescript-eslint/explicit-function-return-type": [
-      "error",
+    'curly': 'warn',
+    'no-return-await': 'warn',
+    'comma-dangle': 'off',
+    '@typescript-eslint/comma-dangle': [
+      'warn',
       {
-        "allowExpressions": true
-      }
+        'arrays': 'always-multiline',
+        'objects': 'always-multiline',
+        'imports': 'always-multiline',
+        'exports': 'always-multiline',
+        'enums': 'always-multiline',
+        'generics': 'always-multiline',
+        'tuples': 'always-multiline',
+        'functions': 'never',
+      },
     ],
-    "@typescript-eslint/no-explicit-any": "off",
-    "no-return-await": "error",
-    "curly": "warn",
-    "@typescript-eslint/no-inferrable-types": "off",
-    "@typescript-eslint/restrict-template-expressions": "off",
-    "@typescript-eslint/typedef": [
-      "warn",
+    '@typescript-eslint/explicit-member-accessibility': 'warn',
+    '@typescript-eslint/explicit-function-return-type': [
+      'error',
       {
-        "arrowParameter": false,
-        "variableDeclaration": false,
-        "memberVariableDeclaration": true,
-        "propertyDeclaration": true
-      }
+        'allowExpressions': true,
+      },
     ],
-    "@typescript-eslint/no-empty-function": "off"
-  }
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-inferrable-types': 'off',
+    '@typescript-eslint/restrict-template-expressions': 'off',
+    '@typescript-eslint/typedef': [
+      'warn',
+      {
+        'arrowParameter': false,
+        'variableDeclaration': false,
+        'memberVariableDeclaration': true,
+        'propertyDeclaration': true,
+      },
+    ],
+    '@typescript-eslint/no-empty-function': 'off',
+    '@typescript-eslint/quotes': [
+      'warn',
+      'single',
+    ],
+  },
 };

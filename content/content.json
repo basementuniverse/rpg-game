@@ -2,32 +2,32 @@
   "items": [
     {
 			"name": "logo",
-			"loader": "image",
+			"type": "image",
 			"args": ["images/logo.png"]
     },
     {
       "name": "testfont",
-      "loader": "font",
+      "type": "font",
       "args": ["fonts/aniron.ttf"]
     },
     {
       "name": "testdata1",
-      "loader": "json",
+      "type": "json",
       "args": ["json/testdata1.json"]
     },
     {
       "name": "testdata2",
-      "loader": "json",
+      "type": "json",
       "args": ["json/testdata2.json"]
     },
     {
       "name": "testdata3",
-      "loader": "json",
+      "type": "json",
       "args": ["json/testdata3.json"]
     },
     {
       "name": "testsound",
-      "loader": "audio",
+      "type": "audio",
       "args": ["sounds/blip1.wav"]
     }
   ]

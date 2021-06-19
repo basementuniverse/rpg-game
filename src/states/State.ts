@@ -1,4 +1,3 @@
-import StateManager from './StateManager';
 import { StateTransitionType } from '../enums';
 
 export type StateOptions = {
@@ -8,11 +7,10 @@ export type StateOptions = {
 
 export abstract class State {
   private readonly defaultOptions: StateOptions = {
-    transitionTime: 5,
-    transparent: false
+    transitionTime: 1,
+    transparent: false,
   };
 
-  public stateManager: StateManager;
   public transitionType: StateTransitionType = StateTransitionType.None;
   public transitionAmount: number = 0;
   public transitionTime: number;
@@ -21,13 +19,11 @@ export abstract class State {
 
   public testName: string = '';
 
-  constructor(options: Partial<StateOptions> = {}) {
+  public constructor(options: Partial<StateOptions> = {}) {
     const actualOptions = Object.assign({}, this.defaultOptions, options);
     this.transitionTime = actualOptions.transitionTime;
     this.transparent = actualOptions.transparent;
   }
-
-  public initialise(): void {}
 
   public dispose(): void {
     this.disposed = true;
@@ -58,9 +54,9 @@ export abstract class State {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public update(dt: number): void {}
+  public abstract initialise(): void;
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public draw(context: CanvasRenderingContext2D): void {}
+  public abstract update(dt: number): void;
+
+  public abstract draw(context: CanvasRenderingContext2D): void;
 }

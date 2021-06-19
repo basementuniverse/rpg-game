@@ -4,15 +4,15 @@ export default class Menu {
   private items: MenuItem[];
   private selectedIndex: number;
 
-  constructor(items: MenuItem[]) {
+  public constructor(items: MenuItem[]) {
     this.items = items;
   }
 
-  update(dt: number): void {
-    //
-  }
+  // public update(dt: number): void {
+  //   //
+  // }
 
-  draw(context: CanvasRenderingContext2D): void {
-    //
-  }
+  // public draw(context: CanvasRenderingContext2D): void {
+  //   //
+  // }
 }

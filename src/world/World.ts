@@ -1,3 +1,3 @@
-export default class World {
+export class World {
   //
 }

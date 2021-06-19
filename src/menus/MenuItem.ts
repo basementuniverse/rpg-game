@@ -1,5 +1,5 @@
 export default class MenuItem {
-  constructor() {
+  public constructor() {
     //
   }
 

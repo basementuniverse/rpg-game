@@ -1,9 +1,12 @@
 import * as config from './config.json';
 import * as constants from './constants';
-// import Content from './Content';
 import Debug from './Debug';
-import Input from './Input';
-import StateManager from './states/StateManager';
+import {
+  ContentManager,
+  InputManager,
+  StateManager,
+} from './managers';
+import { IntroState } from './states';
 
 export default class Game {
   private canvas: HTMLCanvasElement;
@@ -13,13 +16,7 @@ export default class Game {
   private frameRate: number = 0;
   private frameCount: number = 0;
 
-  public stateManager: StateManager;
-
-  /**
-   * Create a new game
-   * @param container The canvas in which the game should be rendered
-   */
-  constructor(container: HTMLElement | null) {
+  public constructor(container: HTMLElement | null) {
     if (container === null) {
       throw new Error('A valid container element must be specified.');
     }
@@ -39,11 +36,6 @@ export default class Game {
     // Handle resize
     window.addEventListener('resize', this.resize.bind(this), false);
     this.resize();
-
-    // Initialise subsystems
-    Debug.initialise();
-    Input.initialise(this.canvas);
-    this.stateManager = new StateManager();
   }
 
   private resize(): void {
@@ -58,8 +50,19 @@ export default class Game {
    * Initialise the game and start playing
    */
   public initialise(): void {
+
+    // Initialise subsystems
+    Debug.initialise();
+    ContentManager.initialise();
+    InputManager.initialise(this.canvas);
+    StateManager.initialise();
+
+    // Start game loop
     this.lastFrameTime = this.lastFrameCountTime = performance.now();
     this.loop();
+
+    // Push the intro state
+    StateManager.push(new IntroState());
   }
 
   private loop(): void {
@@ -85,14 +88,14 @@ export default class Game {
   }
 
   private update(dt: number): void {
-    this.stateManager.update(dt);
-    Input.update();
+    StateManager.update(dt);
+    InputManager.update();
   }
 
   private draw(): void {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.context.setTransform(config.scaleFactor, 0, 0, config.scaleFactor, 0, 0);
-    this.stateManager.draw(this.context);
+    StateManager.draw(this.context);
     Debug.draw(this.context);
   }
 }

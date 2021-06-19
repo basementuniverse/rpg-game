@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "lint": "npx eslint src/**/* --ext .js,.jsx,.ts,.tsx",
+    "lint": "npx eslint src/**/* --ext .ts",
     "build": "webpack",
-    "start": "http-server -a localhost -p 8080 -o index.html",
-    "test": ""
+    "start": "http-server -a localhost -p 8080 -o index.html"
   },
   "author": "Gordon Larrigan <gordonlarrigan@gmail.com> (https://gordonlarrigan.com)",
   "license": "MIT",

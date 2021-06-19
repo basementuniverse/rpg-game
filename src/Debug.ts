@@ -77,7 +77,6 @@ export default class Debug {
 
   /**
    * Initialise the debug renderer for displaying values and markers
-   * @param options Rendering options
    */
   public static initialise(options: Partial<DebugOptions> = {}): void {
     Debug.instance = new Debug(options);
@@ -92,9 +91,6 @@ export default class Debug {
 
   /**
    * Show a debug value
-   * @param label The label for this value
-   * @param value The current value
-   * @param options Rendering options
    */
   public static value(label: string, value: string | number, options: Partial<DebugValue> = {}): void {
     const debug = Debug.getInstance();
@@ -107,10 +103,6 @@ export default class Debug {
 
   /**
    * Show a marker in world or screen space
-   * @param label The label for this marker
-   * @param value The current value
-   * @param position The position of this marker
-   * @param options Rendering options
    */
   public static marker(label: string, value: string | number, position: vec, options: Partial<DebugMarker> = {}): void {
     const debug = Debug.getInstance();
@@ -121,10 +113,6 @@ export default class Debug {
     ));
   }
 
-  /**
-   * Render debug values and markers onto the context
-   * @param context The rendering context
-   */
   public static draw(context: CanvasRenderingContext2D): void {
     const debug = Debug.getInstance();
 
