@@ -1,7 +1,7 @@
 import * as content from '../../content/content.json';
 import * as utilities from '../utilities';
 import * as constants from '../constants';
-import { FontLoader, ImageLoader, JSONLoader, SoundLoader } from '../loaders';
+import { FontLoader, ImageLoader, JSONLoader, SoundLoader } from '../content';
 
 const contentItemLoaders: {
   [key in ContentItemType]: ContentItemLoader;
