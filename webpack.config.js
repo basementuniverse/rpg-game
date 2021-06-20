@@ -1,4 +1,5 @@
 const path = require('path');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
@@ -26,5 +27,23 @@ module.exports = {
     maxAssetSize: 512000,
   },
   externals: [],
-  plugins: [],
+  plugins: [
+    new CleanWebpackPlugin(),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: 'content',
+          to: 'content',
+          globOptions: {
+            ignore: [
+              '**/content.json',
+            ],
+          },
+        },
+      ],
+      options: {
+        concurrency: 100,
+      },
+    }),
+  ],
 };
