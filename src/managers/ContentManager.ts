@@ -1,36 +1,15 @@
 import * as content from '../../content/content.json';
 import * as utilities from '../utilities';
-
-const contentItemTypes = ['image', 'sound', 'font', 'json'] as const;
-type ContentItemType = typeof contentItemTypes[number];
-
-type ContentItem = {
-  name: string;
-  type: ContentItemType;
-  args: string[];
-};
-
-type ContentItemLoader = <T>(...args: string[]) => Promise<T>;
+import * as constants from '../constants';
+import { FontLoader, ImageLoader, JSONLoader, SoundLoader } from '../loaders';
 
 const contentItemLoaders: {
   [key in ContentItemType]: ContentItemLoader;
 } = {
-  image: async <HTMLImageElement>(url: string): Promise<HTMLImageElement> => {
-    await utilities.sleep(1000);
-    throw new Error(`loading image "${url}"...`);
-  },
-  sound: async <HTMLAudioElement>(url: string): Promise<HTMLAudioElement> => {
-    await utilities.sleep(1000);
-    throw new Error(`loading audio "${url}"...`);
-  },
-  font: async <FontFace>(url: string): Promise<FontFace> => {
-    await utilities.sleep(1000);
-    throw new Error(`loading font "${url}"...`);
-  },
-  json: async (url: string): Promise<any> => {
-    await utilities.sleep(1000);
-    throw new Error(`loading json "${url}"...`);
-  },
+  image: ImageLoader,
+  sound: SoundLoader,
+  font: FontLoader,
+  json: JSONLoader,
 };
 
 export class ContentManager {
@@ -49,7 +28,6 @@ export class ContentManager {
    */
   public static initialise(): void {
     ContentManager.instance = new ContentManager(content.items as ContentItem[]);
-    console.log(content);
   }
 
   private static getInstance(): ContentManager {
@@ -70,6 +48,9 @@ export class ContentManager {
     const progressDelta = 1 / instance.content.length;
     const items: any[] = [];
     for (const c of instance.content) {
+      if (constants.DEBUG && constants.SIMULATE_SLOW_LOADING) {
+        await utilities.sleep(Math.randomBetween(100, 1000));
+      }
       items.push(await contentItemLoaders[c.type](...c.args));
       ContentManager.progress = Math.clamp(ContentManager.progress + progressDelta, 0, 1);
     }
