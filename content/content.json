@@ -1,34 +1,34 @@
 {
   "items": [
     {
-			"name": "logo",
-			"type": "image",
-			"args": ["images/logo.png"]
+      "name": "logo",
+      "type": "image",
+      "args": ["content/images/logo.png"]
     },
     {
       "name": "testfont",
       "type": "font",
-      "args": ["fonts/aniron.ttf"]
+      "args": ["content/fonts/aniron.ttf", "aniron"]
     },
     {
       "name": "testdata1",
       "type": "json",
-      "args": ["json/testdata1.json"]
+      "args": ["content/json/testdata1.json"]
     },
     {
       "name": "testdata2",
       "type": "json",
-      "args": ["json/testdata2.json"]
+      "args": ["content/json/testdata2.json"]
     },
     {
       "name": "testdata3",
       "type": "json",
-      "args": ["json/testdata3.json"]
+      "args": ["content/json/testdata3.json"]
     },
     {
       "name": "testsound",
-      "type": "audio",
-      "args": ["sounds/blip1.wav"]
+      "type": "sound",
+      "args": ["content/sounds/blip1.wav"]
     }
   ]
 }
