@@ -2,13 +2,11 @@ import { StateTransitionType } from '../enums';
 
 export type StateOptions = {
   transitionTime: number,
-  transparent: boolean
 };
 
 export abstract class State {
   private readonly defaultOptions: StateOptions = {
-    transitionTime: 1,
-    transparent: false,
+    transitionTime: 2,
   };
 
   public transitionType: StateTransitionType = StateTransitionType.None;
@@ -17,12 +15,9 @@ export abstract class State {
   public transparent: boolean;
   public disposed: boolean = false;
 
-  public testName: string = '';
-
   public constructor(options: Partial<StateOptions> = {}) {
     const actualOptions = Object.assign({}, this.defaultOptions, options);
     this.transitionTime = actualOptions.transitionTime;
-    this.transparent = actualOptions.transparent;
   }
 
   public dispose(): void {
@@ -31,26 +26,31 @@ export abstract class State {
 
   public transitionIn(): void {
     this.transitionType = StateTransitionType.In;
-    this.transitionAmount = 0;
   }
 
   public transitionOut(): void {
     this.transitionType = StateTransitionType.Out;
-    this.transitionAmount = 0;
   }
 
   public updateTransition(dt: number): void {
     const amount: number = dt / this.transitionTime;
-    if (this.transitionAmount < 1) {
-      this.transitionAmount = Math.clamp(this.transitionAmount + amount);
 
-    // Dispose this state if it has finished transitioning out
-    } else if (this.transitionType === StateTransitionType.Out) {
-      this.dispose();
+    // Transitioning in
+    if (this.transitionType === StateTransitionType.In) {
+      if (this.transitionAmount < 1) {
+        this.transitionAmount = Math.clamp(this.transitionAmount + amount);
+      } else {
+        this.transitionType = StateTransitionType.None;
+      }
+    }
 
-    // Otherwise, the state has finished transitioning in
-    } else {
-      this.transitionType = StateTransitionType.None;
+    // Transitioning out
+    if (this.transitionType === StateTransitionType.Out) {
+      if (this.transitionAmount > 0) {
+        this.transitionAmount = Math.clamp(this.transitionAmount - amount);
+      } else {
+        this.dispose();
+      }
     }
   }
 

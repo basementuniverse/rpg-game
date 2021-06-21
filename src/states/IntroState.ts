@@ -1,32 +1,29 @@
 import { State } from './State';
-import { ContentManager } from '../managers';
-import Debug from '../Debug';
+import * as config from '../config.json';
+import { StateTransitionType } from '../enums';
 
 export class IntroState extends State {
-  private finishedLoadingContent: boolean = false;
-
   public constructor() {
     super({
-      transitionTime: 2,
+      transitionTime: 1,
     });
   }
 
   public initialise(): void {
-    ContentManager.load().then(() => {
-      this.finishedLoadingContent = true;
-    }).catch((error: string) => {
-      console.log(`Unable to load content: ${error}`);
-    });
+    //
   }
 
   public update(): void {
-    Debug.value('progress', ContentManager.progress);
-    if (this.finishedLoadingContent) {
-      Debug.value('finished', 'yes');
-    }
+    //
   }
 
   public draw(context: CanvasRenderingContext2D): void {
-    //
+    context.save();
+    if (this.transitionType !== StateTransitionType.None) {
+      context.globalAlpha = this.transitionAmount;
+    }
+    context.fillStyle = '#38f';
+    context.fillRect(0, 0, context.canvas.width * config.scaleFactor, context.canvas.height * config.scaleFactor);
+    context.restore();
   }
 }

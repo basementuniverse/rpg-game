@@ -1,12 +1,10 @@
 import * as config from './config.json';
 import * as constants from './constants';
 import Debug from './Debug';
-import {
-  ContentManager,
-  InputManager,
-  StateManager,
-} from './managers';
-import { IntroState } from './states';
+import Input from './Input';
+import Content from './content/Content';
+import StateManager from './states/StateManager';
+import { LoadingState } from './states';
 
 export default class Game {
   private canvas: HTMLCanvasElement;
@@ -53,16 +51,16 @@ export default class Game {
 
     // Initialise subsystems
     Debug.initialise();
-    ContentManager.initialise();
-    InputManager.initialise(this.canvas);
+    Input.initialise();
+    Content.initialise();
     StateManager.initialise();
 
     // Start game loop
     this.lastFrameTime = this.lastFrameCountTime = performance.now();
     this.loop();
 
-    // Push the intro state
-    StateManager.push(new IntroState());
+    // Push the initial loading state
+    StateManager.push(new LoadingState());
   }
 
   private loop(): void {
@@ -89,7 +87,7 @@ export default class Game {
 
   private update(dt: number): void {
     StateManager.update(dt);
-    InputManager.update();
+    Input.update();
   }
 
   private draw(): void {

@@ -1,4 +1,4 @@
-import { Key } from '../enums';
+import { Key } from './enums';
 import { vec } from '@basementuniverse/commonjs';
 
 type MouseState = {
@@ -11,37 +11,37 @@ type KeyboardState = {
   [key in Key]?: boolean
 };
 
-export class InputManager {
-  private static instance: InputManager;
+export default class Input {
+  private static instance: Input;
   private keyboardState: KeyboardState = {};
   private previousKeyboardState: KeyboardState = {};
   private mouseState: MouseState = { button: false, position: vec(), wheel: 0 };
   private previousMouseState: MouseState = { button: false, position: vec(), wheel: 0 };
 
-  private constructor(canvas: HTMLCanvasElement) {
-    canvas.addEventListener('mousedown', () => {
+  private constructor() {
+    window.addEventListener('mousedown', () => {
       this.mouseState.button = true;
     });
-    canvas.addEventListener('mouseup', () => {
+    window.addEventListener('mouseup', () => {
       this.mouseState.button = false;
     });
-    canvas.addEventListener('touchstart', () => {
+    window.addEventListener('touchstart', () => {
       this.mouseState.button = true;
     });
-    canvas.addEventListener('touchend', () => {
+    window.addEventListener('touchend', () => {
       this.mouseState.button = false;
     });
-    canvas.addEventListener('mousemove', e => {
+    window.addEventListener('mousemove', e => {
       this.mouseState.position.x = e.offsetX;
       this.mouseState.position.y = e.offsetY;
     });
-    canvas.addEventListener('keydown', e => {
+    window.addEventListener('keydown', e => {
       this.keyboardState[e.code as Key] = true;
     });
-    canvas.addEventListener('keyup', e => {
+    window.addEventListener('keyup', e => {
       this.keyboardState[e.code as Key] = false;
     });
-    canvas.addEventListener('wheel', e => {
+    window.addEventListener('wheel', e => {
       this.mouseState.wheel = e.deltaY > 0 ? 1 : -1;
     });
   }
@@ -49,22 +49,22 @@ export class InputManager {
   /**
    * Initialise the input manager for managing mouse and keyboard input
    */
-  public static initialise(canvas: HTMLCanvasElement): void {
-    InputManager.instance = new InputManager(canvas);
+  public static initialise(): void {
+    Input.instance = new Input();
   }
 
-  private static getInstance(): InputManager {
-    if (InputManager.instance === undefined) {
+  private static getInstance(): Input {
+    if (Input.instance === undefined) {
       throw new Error('Input manager not properly initialised');
     }
-    return InputManager.instance;
+    return Input.instance;
   }
 
   /**
    * Update the state of the input devices
    */
   public static update(): void {
-    const instance = InputManager.getInstance();
+    const instance = Input.getInstance();
     instance.previousKeyboardState = Object.assign({}, instance.keyboardState);
     instance.previousMouseState = {
       button: instance.mouseState.button,
@@ -77,7 +77,7 @@ export class InputManager {
    * Check if a key is currently pressed down
    */
   public static keyDown(key?: Key): boolean {
-    const instance = InputManager.getInstance();
+    const instance = Input.getInstance();
 
     // Check if any key is down
     if (key == null) {
@@ -95,7 +95,7 @@ export class InputManager {
    * Check if a key has been pressed since the last frame
    */
   public static keyPressed(key?: Key): boolean {
-    const instance = InputManager.getInstance();
+    const instance = Input.getInstance();
 
     // Check if any key was pressed
     if (key == null) {
@@ -119,7 +119,7 @@ export class InputManager {
    * Check if a key has been released since the last frame
    */
   public static keyReleased(key?: Key): boolean {
-    const instance = InputManager.getInstance();
+    const instance = Input.getInstance();
 
     // Check if any key was released
     if (key == null) {
@@ -140,7 +140,7 @@ export class InputManager {
    * Check if a mouse button is currently pressed down
    */
   public static mouseDown(): boolean {
-    const instance = InputManager.getInstance();
+    const instance = Input.getInstance();
     return !!instance.mouseState.button;
   }
 
@@ -148,7 +148,7 @@ export class InputManager {
    * Check if a mouse button has been pressed since the last frame
    */
   public static mousePressed(): boolean {
-    const instance = InputManager.getInstance();
+    const instance = Input.getInstance();
     return !!instance.mouseState.button && !instance.previousMouseState.button;
   }
 
@@ -156,7 +156,7 @@ export class InputManager {
    * Check if a mouse button has been released since the last frame
    */
   public static mouseReleased(): boolean {
-    const instance = InputManager.getInstance();
+    const instance = Input.getInstance();
     return !instance.mouseState.button && !!instance.previousMouseState.button;
   }
 
@@ -164,7 +164,7 @@ export class InputManager {
    * Check if the mousewheel is scrolling up
    */
   public static mouseWheelUp(): boolean {
-    const instance = InputManager.getInstance();
+    const instance = Input.getInstance();
     return instance.mouseState.wheel > 0;
   }
 
@@ -172,7 +172,7 @@ export class InputManager {
    * Check if the mousewheel is scrolling down
    */
   public static mouseWheelDown(): boolean {
-    const instance = InputManager.getInstance();
+    const instance = Input.getInstance();
     return instance.mouseState.wheel < 0;
   }
 
@@ -180,7 +180,7 @@ export class InputManager {
    * Get the current mouse position in screen-space
    */
   public static mousePosition(): vec {
-    const instance = InputManager.getInstance();
+    const instance = Input.getInstance();
     return instance.mouseState.position;
   }
 }

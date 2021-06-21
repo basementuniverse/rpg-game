@@ -10,4 +10,4 @@ export const SoundLoader: ContentItemLoader = async <HTMLAudioElement>(
       reject(`Error loading sound "${url}"`);
     });
   });
-}
+};

@@ -11,4 +11,4 @@ export const ImageLoader: ContentItemLoader = async <HTMLImageElement>(
       reject(`Error loading image "${url}"`);
     });
   });
-}
+};

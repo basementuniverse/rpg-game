@@ -1,7 +1,7 @@
 import { State } from '../states/State';
 import { StateTransitionType } from '../enums';
 
-export class StateManager {
+export default class StateManager {
   private static instance: StateManager;
   private states: State[] = [];
 
@@ -81,23 +81,8 @@ export class StateManager {
 
   public static draw(context: CanvasRenderingContext2D): void {
     const instance = StateManager.getInstance();
-    if (instance.states.length > 0) {
-      const drawStates = [instance.states[instance.states.length - 1]];
-      let transparentStateIndex = instance.states.length - 1;
-
-      // Create a list of states that need to be drawn (transparent states also display
-      // the state underneath them in the stack)
-      while (
-        transparentStateIndex > 0 &&
-        instance.states[transparentStateIndex].transparent
-      ) {
-        drawStates.push(instance.states[--transparentStateIndex]);
-      }
-
-      // Draw states in reverse order i.e. bottom to top
-      for (let i = drawStates.length; i--;) {
-        drawStates[i].draw(context);
-      }
+    for (const state of instance.states) {
+      state.draw(context);
     }
   }
 }

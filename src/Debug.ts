@@ -1,4 +1,4 @@
-import { vec } from "@basementuniverse/commonjs";
+import { vec } from '@basementuniverse/commonjs';
 import * as config from './config.json';
 
 type DebugOptions = {
@@ -45,7 +45,7 @@ export default class Debug {
   private static instance: Debug;
   private values: Map<string, DebugValue>;
   private markers: Map<string, DebugMarker>;
-  private options: DebugOptions
+  private options: DebugOptions;
   private readonly defaultOptions: DebugOptions = {
     margin: 10,
     padding: 4,
@@ -55,7 +55,7 @@ export default class Debug {
     backgroundColour: '#3338',
     defaultValue: {
       align: 'left',
-      showLabel: true
+      showLabel: true,
     },
     defaultMarker: {
       showLabel: true,
@@ -65,8 +65,8 @@ export default class Debug {
       markerStyle: 'x',
       markerColour: '#ccc',
       space: 'world',
-      labelOffset: vec(10)
-    }
+      labelOffset: vec(10),
+    },
   };
 
   private constructor(options: Partial<DebugOptions> = {}) {
@@ -184,7 +184,7 @@ export default class Debug {
     }
     if (marker.showMarker) {
       context.lineWidth = 2;
-      context.strokeStyle = context.fillStyle = marker.markerColour as string;
+      context.strokeStyle = context.fillStyle = marker.markerColour;
       switch (marker.markerStyle) {
         case 'x':
           this.drawCross(context, position, marker.markerSize);
@@ -215,12 +215,12 @@ export default class Debug {
     context.textBaseline = 'top';
     const backgroundSize = {
       width: context.measureText(text).width + padding * 2,
-      height: this.options.lineHeight + padding * 2
+      height: this.options.lineHeight + padding * 2,
     };
     const x = align === 'right' ? (position.x - backgroundSize.width) : position.x;
 
     // Draw background
-    context.fillStyle = backgroundColour as string;
+    context.fillStyle = backgroundColour;
     context.fillRect(
       x - padding,
       position.y - padding,
@@ -229,7 +229,7 @@ export default class Debug {
     );
 
     // Draw text
-    context.fillStyle = foregroundColour as string;
+    context.fillStyle = foregroundColour;
     context.fillText(text, x, position.y);
     context.restore();
   }
