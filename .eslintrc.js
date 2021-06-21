@@ -18,6 +18,8 @@ module.exports = {
   rules: {
     'curly': 'warn',
     'no-return-await': 'warn',
+    'semi': 'off',
+    '@typescript-eslint/semi': ['error'],
     'comma-dangle': 'off',
     '@typescript-eslint/comma-dangle': [
       'warn',
@@ -55,6 +57,10 @@ module.exports = {
     '@typescript-eslint/quotes': [
       'warn',
       'single',
+      {
+        "avoidEscape": true,
+        "allowTemplateLiterals": true,
+      },
     ],
   },
 };
