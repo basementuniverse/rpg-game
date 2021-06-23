@@ -8,11 +8,11 @@ export default class Menu {
     this.items = items;
   }
 
-  // public update(dt: number): void {
-  //   //
-  // }
+  public update(dt: number): void {
+    //
+  }
 
-  // public draw(context: CanvasRenderingContext2D): void {
-  //   //
-  // }
+  public draw(context: CanvasRenderingContext2D): void {
+    //
+  }
 }

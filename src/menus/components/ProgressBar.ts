@@ -1,8 +1,9 @@
-import * as config from '../../config.json';
 import { vec } from '@basementuniverse/commonjs';
+import { Anchor } from '../../enums';
 import { roundedRectangle } from '../../utilities';
+import { Component, ComponentOptions } from './Component';
 
-type ProgressBarOptions = {
+type ProgressBarOptions = ComponentOptions & {
   size: vec;
   ease: number,
   padding: number;
@@ -13,9 +14,12 @@ type ProgressBarOptions = {
   barRadius: number;
 };
 
-export class ProgressBar {
-  private options: ProgressBarOptions;
-  private readonly defaultOptions: ProgressBarOptions = {
+export class ProgressBar extends Component {
+  public progress: number = 0;
+  private actualProgress: number = 0;
+  public options: ProgressBarOptions;
+  protected readonly defaultOptions: ProgressBarOptions = {
+    anchor: Anchor.Center,
     size: vec(120, 14),
     ease: 0.9,
     padding: 4,
@@ -26,48 +30,30 @@ export class ProgressBar {
     barRadius: 3,
   };
 
-  private canvas: HTMLCanvasElement;
-  private context: CanvasRenderingContext2D;
-  private position: vec;
-  private targetProgress: number = 0;
-  private actualProgress: number = 0;
-
   public constructor(
-    position: vec = vec(0.5, 0.5),
+    position: vec = vec(),
     options: Partial<ProgressBarOptions> = {}
   ) {
-    this.position = position;
+    super(position);
     this.options = Object.assign({}, this.defaultOptions, options);
-
-    this.canvas = document.createElement('canvas');
-    const context = this.canvas.getContext('2d');
-    if (context !== null) {
-      this.context = context;
-    } else {
-      throw new Error("Couldn't get a 2d context.");
-    }
     this.canvas.width = this.options.size.x;
     this.canvas.height = this.options.size.y;
   }
 
-  public update(dt: number, progress: number): void {
-    this.targetProgress = progress;
-    const delta = this.targetProgress - this.actualProgress;
+  public update(dt: number): void {
+    const delta = this.progress - this.actualProgress;
     this.actualProgress += delta * dt * this.options.ease;
   }
 
   public draw(context: CanvasRenderingContext2D): void {
     this.drawProgressBar();
-    context.drawImage(
-      this.canvas,
-      Math.floor((context.canvas.width / config.scaleFactor) * this.position.x - this.canvas.width / 2),
-      Math.floor((context.canvas.height / config.scaleFactor) * this.position.y - this.canvas.height / 2)
-    );
+    const position = vec.map(vec.add(this.position, this.anchorOffset), Math.floor);
+    context.drawImage(this.canvas, position.x, position.y);
   }
 
   private drawProgressBar(): void {
     this.context.save();
-    this.context.clearRect(0, 0, this.options.size.x, this.options.size.y);
+    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     // Draw border
     this.context.strokeStyle = this.options.borderColour;

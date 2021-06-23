@@ -1,12 +1,37 @@
 {
   "items": [
     {
+      "name": "error",
+      "type": "image",
+      "args": ["content/images/error.png"]
+    },
+    {
       "name": "logo",
       "type": "image",
       "args": ["content/images/logo.png"]
     },
     {
-      "name": "testfont",
+      "name": "menu_background",
+      "type": "image",
+      "args": ["content/images/parchment.png"]
+    },
+    {
+      "name": "menu_title",
+      "type": "image",
+      "args": ["content/images/parchment_banner.png"]
+    },
+    {
+      "name": "menu_button",
+      "type": "image",
+      "args": ["content/images/parchment_button.png"]
+    },
+    {
+      "name": "menu_button_selected",
+      "type": "image",
+      "args": ["content/images/parchment_button_white.png"]
+    },
+    {
+      "name": "menu_font",
       "type": "font",
       "args": ["content/fonts/aniron.ttf", "aniron"]
     },

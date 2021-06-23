@@ -5,6 +5,7 @@ import Input from './Input';
 import Content from './content/Content';
 import StateManager from './states/StateManager';
 import { LoadingState } from './states';
+import { vec } from '@basementuniverse/commonjs';
 
 export default class Game {
   private canvas: HTMLCanvasElement;
@@ -91,9 +92,13 @@ export default class Game {
   }
 
   private draw(): void {
+    const screen = vec.mul(
+      vec(this.canvas.width, this.canvas.height),
+      1 / config.scaleFactor
+    );
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.context.setTransform(config.scaleFactor, 0, 0, config.scaleFactor, 0, 0);
-    StateManager.draw(this.context);
+    StateManager.draw(this.context, screen);
     Debug.draw(this.context);
   }
 }

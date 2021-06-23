@@ -1,9 +1,10 @@
 ---
 created: 2021-04-11T17:37:36.568Z
-updated: 2021-04-11T17:38:53.247Z
+updated: 2021-06-23T12:12:54.778Z
 assigned: ""
 progress: 0
 tags: []
+completed: 2021-06-23T12:12:54.778Z
 ---
 
 # State Manager

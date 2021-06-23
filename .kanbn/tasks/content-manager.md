@@ -1,9 +1,10 @@
 ---
 created: 2021-04-11T17:36:56.098Z
-updated: 2021-04-11T17:36:56.095Z
+updated: 2021-06-23T12:12:57.858Z
 assigned: ""
 progress: 0
 tags: []
+completed: 2021-06-23T12:12:57.858Z
 ---
 
 # Content Manager

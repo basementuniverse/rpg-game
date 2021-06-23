@@ -21,3 +21,15 @@ export enum Key {
   Control = 'Control',
   Escape = 'Escape',
 }
+
+export enum Anchor {
+  TopLeft,
+  TopCenter,
+  TopRight,
+  CenterLeft,
+  Center,
+  CenterRight,
+  BottomLeft,
+  BottomCenter,
+  BottomRight,
+}
