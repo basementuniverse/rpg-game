@@ -1,11 +1,13 @@
-import * as constants from '../constants';
-import { State } from './State';
-import { StateTransitionType } from '../enums';
-import Content from '../content/Content';
-import StateManager from './StateManager';
-import { ProgressBar } from '../menus/components';
-import { IntroState } from '.';
 import { vec } from '@basementuniverse/commonjs';
+import * as constants from '../constants';
+import Content from '../content/Content';
+import { StateTransitionType } from '../enums';
+import Game from '../Game';
+import { ProgressBar } from '../ui/components';
+import { IntroState } from '.';
+import { MainMenuState } from './MainMenuState';
+import State from './State';
+import StateManager from './StateManager';
 
 export class LoadingState extends State {
   private static readonly TRANSITION_TIME: number = 0.5;
@@ -34,6 +36,7 @@ export class LoadingState extends State {
   }
 
   public update(dt: number): void {
+    this.progressBar.position = vec.map(vec.mul(Game.screen, 1 / 2), Math.floor);
     this.progressBar.progress = Content.progress;
     this.progressBar.update(dt);
     if (this.finishedLoadingContent) {
@@ -42,17 +45,19 @@ export class LoadingState extends State {
     if (this.cooldownTime <= 0) {
       StateManager.pop();
       setTimeout(() => {
-        StateManager.push(new IntroState());
+        const nextState = constants.SKIP_INTRO
+          ? new MainMenuState()
+          : new IntroState();
+        StateManager.push(nextState);
       }, LoadingState.INTRO_DELAY * 1000);
     }
   }
 
-  public draw(context: CanvasRenderingContext2D, screen: vec): void {
+  public draw(context: CanvasRenderingContext2D): void {
     context.save();
     if (this.transitionType !== StateTransitionType.None) {
       context.globalAlpha = this.transitionAmount;
     }
-    this.progressBar.position = vec.map(vec.mul(screen, 1 / 2), Math.floor);
     this.progressBar.draw(context);
     context.restore();
   }

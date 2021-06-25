@@ -1,11 +1,10 @@
-import { vec } from '@basementuniverse/commonjs';
 import { StateTransitionType } from '../enums';
 
 export type StateOptions = {
   transitionTime: number,
 };
 
-export abstract class State {
+export default abstract class State {
   private readonly defaultOptions: StateOptions = {
     transitionTime: 2,
   };
@@ -59,5 +58,5 @@ export abstract class State {
 
   public abstract update(dt: number): void;
 
-  public abstract draw(context: CanvasRenderingContext2D, screen: vec): void;
+  public abstract draw(context: CanvasRenderingContext2D): void;
 }

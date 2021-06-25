@@ -9,6 +9,8 @@ module.exports = {
   },
   plugins: [
     '@typescript-eslint',
+    'simple-import-sort',
+    'import',
   ],
   extends: [
     'eslint:recommended',
@@ -62,5 +64,16 @@ module.exports = {
         "allowTemplateLiterals": true,
       },
     ],
+    'sort-imports': 'off',
+    'simple-import-sort/imports': [
+      'warn',
+      {
+        'groups': [['^\\u0000', '^@?\\w', '^[^.]', '^\\.']],
+      },
+    ],
+    'simple-import-sort/exports': 'warn',
+    'import/first': 'warn',
+    'import/newline-after-import': 'warn',
+    'import/no-duplicates': 'error',
   },
 };

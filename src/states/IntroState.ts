@@ -1,14 +1,15 @@
-import { State } from './State';
-import { StateTransitionType } from '../enums';
-import Input from '../Input';
-import StateManager from './StateManager';
-import { MainMenuState } from '.';
 import { vec } from '@basementuniverse/commonjs';
-import { Image } from '../menus/components';
+import { StateTransitionType } from '../enums';
+import Game from '../Game';
+import Input from '../Input';
+import { Image } from '../ui/components';
+import { MainMenuState } from '.';
+import State from './State';
+import StateManager from './StateManager';
 
 export class IntroState extends State {
   private static readonly TRANSITION_TIME: number = 5;
-  private static readonly SKIPLOCK_TIME: number = 4;
+  private static readonly SKIPLOCK_TIME: number = 2;
   private static readonly AUTOSKIP_TIME: number = 10;
 
   private logo: Image;
@@ -28,6 +29,8 @@ export class IntroState extends State {
   }
 
   public update(dt: number): void {
+    this.logo.position = vec.map(vec.mul(Game.screen, 1 / 2), Math.floor);
+    this.logo.update();
     this.skipLockTime -= dt;
     this.autoSkipTime -= dt;
     if (
@@ -39,12 +42,11 @@ export class IntroState extends State {
     }
   }
 
-  public draw(context: CanvasRenderingContext2D, screen: vec): void {
+  public draw(context: CanvasRenderingContext2D): void {
     context.save();
     if (this.transitionType !== StateTransitionType.None) {
       context.globalAlpha = this.transitionAmount;
     }
-    this.logo.position = vec.map(vec.mul(screen, 1 / 2), Math.floor);
     this.logo.draw(context);
     context.restore();
   }

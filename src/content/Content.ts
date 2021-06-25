@@ -1,9 +1,9 @@
-import * as utilities from '../utilities';
-import * as constants from '../constants';
-import * as _contentManifest from '../../content/content.json';
-import { ContentItemType } from '../enums';
-import { FontLoader, ImageLoader, JSONLoader, SoundLoader } from '../content';
 import JSONSchemaValidator from 'ajv';
+import * as _contentManifest from '../../content/content.json';
+import * as constants from '../constants';
+import { FontLoader, ImageLoader, JSONLoader, SoundLoader } from '../content';
+import { ContentItemType } from '../enums';
+import * as utilities from '../utilities';
 
 type ContentItem = {
   name: string;

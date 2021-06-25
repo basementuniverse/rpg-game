@@ -1,3 +1,3 @@
-export class ViewArea {
+export default class ViewArea {
   //
 }

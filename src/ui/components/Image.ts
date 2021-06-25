@@ -1,7 +1,7 @@
 import { vec } from '@basementuniverse/commonjs';
 import Content from '../../content/Content';
 import { Anchor } from '../../enums';
-import { Component, ComponentOptions } from './Component';
+import Component, { ComponentOptions } from './Component';
 
 type ImageOptions = ComponentOptions;
 
@@ -24,7 +24,11 @@ export class Image extends Component {
     this.canvas.height = this.image.height;
   }
 
-  public update(): void {}
+  public update(): void {
+    if (this.options.parent) {
+      this.position = this.options.parent.position;
+    }
+  }
 
   public draw(context: CanvasRenderingContext2D): void {
     this.drawImage();

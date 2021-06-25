@@ -1,6 +1,6 @@
 import { vec } from '@basementuniverse/commonjs';
 import { Anchor } from '../../enums';
-import { Component, ComponentOptions } from './Component';
+import Component, { ComponentOptions } from './Component';
 
 type TextOptions = ComponentOptions & {
   size: number;
@@ -34,7 +34,11 @@ export class Text extends Component {
     this.canvas.height = this.options.size + this.options.padding * 2;
   }
 
-  public update(): void {}
+  public update(): void {
+    if (this.options.parent) {
+      this.position = this.options.parent.position;
+    }
+  }
 
   public draw(context: CanvasRenderingContext2D): void {
     this.drawText();

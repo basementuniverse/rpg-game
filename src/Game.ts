@@ -1,11 +1,11 @@
+import { vec } from '@basementuniverse/commonjs';
 import * as config from './config.json';
 import * as constants from './constants';
+import Content from './content/Content';
 import Debug from './Debug';
 import Input from './Input';
-import Content from './content/Content';
-import StateManager from './states/StateManager';
 import { LoadingState } from './states';
-import { vec } from '@basementuniverse/commonjs';
+import StateManager from './states/StateManager';
 
 export default class Game {
   private canvas: HTMLCanvasElement;
@@ -14,6 +14,8 @@ export default class Game {
   private lastFrameCountTime: number;
   private frameRate: number = 0;
   private frameCount: number = 0;
+
+  public static screen: vec;
 
   public constructor(container: HTMLElement | null) {
     if (container === null) {
@@ -87,18 +89,18 @@ export default class Game {
   }
 
   private update(dt: number): void {
+    Game.screen = vec.mul(
+      vec(this.canvas.width, this.canvas.height),
+      1 / config.scaleFactor
+    );
     StateManager.update(dt);
     Input.update();
   }
 
   private draw(): void {
-    const screen = vec.mul(
-      vec(this.canvas.width, this.canvas.height),
-      1 / config.scaleFactor
-    );
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.context.setTransform(config.scaleFactor, 0, 0, config.scaleFactor, 0, 0);
-    StateManager.draw(this.context, screen);
+    StateManager.draw(this.context);
     Debug.draw(this.context);
   }
 }

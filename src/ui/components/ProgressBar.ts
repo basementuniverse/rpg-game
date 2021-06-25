@@ -1,7 +1,7 @@
 import { vec } from '@basementuniverse/commonjs';
 import { Anchor } from '../../enums';
 import { roundedRectangle } from '../../utilities';
-import { Component, ComponentOptions } from './Component';
+import Component, { ComponentOptions } from './Component';
 
 type ProgressBarOptions = ComponentOptions & {
   size: vec;
@@ -43,6 +43,9 @@ export class ProgressBar extends Component {
   public update(dt: number): void {
     const delta = this.progress - this.actualProgress;
     this.actualProgress += delta * dt * this.options.ease;
+    if (this.options.parent) {
+      this.position = this.options.parent.position;
+    }
   }
 
   public draw(context: CanvasRenderingContext2D): void {

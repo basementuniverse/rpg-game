@@ -1,3 +1,3 @@
-export class EntityManager {
+export default class EntityManager {
   //
 }

@@ -1,5 +1,5 @@
-import { Key } from './enums';
 import { vec } from '@basementuniverse/commonjs';
+import { Key } from './enums';
 
 type MouseState = {
   button: boolean,

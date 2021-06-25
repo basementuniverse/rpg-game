@@ -1,6 +1,5 @@
-import { State } from '../states/State';
 import { StateTransitionType } from '../enums';
-import { vec } from '@basementuniverse/commonjs';
+import State from '../states/State';
 
 export default class StateManager {
   private static instance: StateManager;
@@ -80,10 +79,10 @@ export default class StateManager {
     }
   }
 
-  public static draw(context: CanvasRenderingContext2D, screen: vec): void {
+  public static draw(context: CanvasRenderingContext2D): void {
     const instance = StateManager.getInstance();
     for (const state of instance.states) {
-      state.draw(context, screen);
+      state.draw(context);
     }
   }
 }

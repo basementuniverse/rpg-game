@@ -1,11 +1,13 @@
 import { vec } from '@basementuniverse/commonjs';
 import { Anchor } from '../../enums';
+import HasTransforms from '../contracts/HasTransforms';
 
 export type ComponentOptions = {
+  parent?: HasTransforms;
   anchor: Anchor;
 };
 
-export abstract class Component {
+export default abstract class Component implements HasTransforms {
   public position: vec;
   public options: ComponentOptions & Record<string, unknown>;
   protected canvas: HTMLCanvasElement;
@@ -13,7 +15,6 @@ export abstract class Component {
 
   public constructor(position: vec = vec()) {
     this.position = position;
-
     this.canvas = document.createElement('canvas');
     const context = this.canvas.getContext('2d');
     if (context !== null) {
