@@ -36,6 +36,11 @@
       "args": ["content/fonts/aniron.ttf", "aniron"]
     },
     {
+      "name": "menu_font_bold",
+      "type": "font",
+      "args": ["content/fonts/aniron-bold.ttf", "aniron-bold"]
+    },
+    {
       "name": "testdata1",
       "type": "json",
       "args": ["content/json/testdata1.json"]
