@@ -9,7 +9,9 @@ export default class Menu {
   }
 
   public update(dt: number): void {
-    //
+    for (const item of this.items) {
+      //
+    }
   }
 
   public draw(context: CanvasRenderingContext2D): void {

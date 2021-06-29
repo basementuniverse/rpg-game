@@ -7,6 +7,8 @@ type TextOptions = ComponentOptions & {
   font: string;
   padding: number;
   colour: Colour;
+  strokeWidth: number;
+  strokeColour: Colour;
 };
 
 export class Text extends Component {
@@ -17,7 +19,9 @@ export class Text extends Component {
     size: 30,
     font: 'sans-serif',
     padding: 4,
-    colour: '#ffc',
+    colour: '#000',
+    strokeWidth: 0,
+    strokeColour: '#fff',
   };
 
   public constructor(
@@ -51,6 +55,13 @@ export class Text extends Component {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.context.font = `${this.options.size}px ${this.options.font}`;
     this.context.textBaseline = 'top';
+    if (this.options.strokeWidth > 0) {
+      this.context.lineWidth = this.options.strokeWidth;
+      this.context.lineCap = 'round';
+      this.context.lineJoin = 'round';
+      this.context.strokeStyle = this.options.strokeColour;
+      this.context.strokeText(this.text, this.options.padding, this.options.padding);
+    }
     this.context.fillStyle = this.options.colour;
     this.context.fillText(this.text, this.options.padding, this.options.padding);
     this.context.restore();
