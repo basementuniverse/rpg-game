@@ -1,21 +1,35 @@
 import { vec } from '@basementuniverse/commonjs';
+import GameWorker from 'worker-loader!../workers';
 import * as config from '../config.json';
 import Content from '../content/Content';
 import { StateTransitionType } from '../enums';
 import Game from '../Game';
+import { Image } from '../ui/components';
 import MenuItem from '../ui/MenuItem';
 import State from './State';
 
 export class MainMenuState extends State {
   private background: HTMLImageElement;
   private backgroundPattern: CanvasPattern | null;
+  private titleBanner: Image;
 
   private testMenuItem: MenuItem;
   private testTime: number = 0;
 
+  private testWorker: GameWorker;
+
   public initialise(): void {
     this.background = Content.get<HTMLImageElement>('menu_background');
-    this.testMenuItem = new MenuItem(vec(100, 100), 'Test Button');
+    this.titleBanner = new Image('menu_title');
+    this.testMenuItem = new MenuItem('Test Button');
+
+    this.testWorker = new GameWorker();
+    this.testWorker.postMessage('menu');
+    this.testWorker.postMessage('test');
+    this.testWorker.postMessage('monkey');
+    this.testWorker.onmessage = event => {
+      console.log(event.data);
+    };
   }
 
   public update(dt: number): void {
