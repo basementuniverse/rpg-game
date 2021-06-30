@@ -1,7 +1,7 @@
 import Entity from '../Entity';
 import System from './System';
 
-export class RenderSystem extends System {
+export class CollisionSystem extends System {
   public update(dt: number, entities: Entity[]): void {
     //
   }
