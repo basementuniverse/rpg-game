@@ -41,24 +41,9 @@
       "args": ["content/fonts/aniron-bold.ttf", "aniron-bold"]
     },
     {
-      "name": "testdata1",
-      "type": "json",
-      "args": ["content/json/testdata1.json"]
-    },
-    {
-      "name": "testdata2",
-      "type": "json",
-      "args": ["content/json/testdata2.json"]
-    },
-    {
-      "name": "testdata3",
-      "type": "json",
-      "args": ["content/json/testdata3.json"]
-    },
-    {
-      "name": "testsound",
-      "type": "sound",
-      "args": ["content/sounds/blip1.wav"]
+      "name": "testEntity",
+      "type": "entityData",
+      "args": ["content/json/testEntity.json"]
     }
   ]
 }

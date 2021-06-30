@@ -2,11 +2,14 @@ import { vec } from '@basementuniverse/commonjs';
 import GameWorker from 'worker-loader!../workers';
 import * as config from '../config.json';
 import Content from '../content/Content';
-import { StateTransitionType } from '../enums';
+import { Key, StateTransitionType } from '../enums';
 import Game from '../Game';
+import Input from '../Input';
 import { Image } from '../ui/components';
 import MenuItem from '../ui/MenuItem';
+import { GameState } from '.';
 import State from './State';
+import StateManager from './StateManager';
 
 export class MainMenuState extends State {
   private background: HTMLImageElement;
@@ -37,6 +40,10 @@ export class MainMenuState extends State {
     this.testMenuItem.update(dt);
     this.testTime += dt;
     this.testMenuItem.selected = Math.sin(this.testTime / 2) > 0;
+    if (Input.keyPressed(Key.Space)) {
+      StateManager.pop();
+      StateManager.push(new GameState());
+    }
   }
 
   public draw(context: CanvasRenderingContext2D): void {

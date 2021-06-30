@@ -2,7 +2,7 @@ export enum ContentItemType {
   Image = 'image',
   Sound = 'sound',
   Font = 'font',
-  JSON = 'json',
+  EntityData = 'entityData',
 }
 
 export enum StateTransitionType {

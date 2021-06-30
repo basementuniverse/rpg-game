@@ -1,8 +1,7 @@
-/* eslint @typescript-eslint/no-unsafe-return: 0 */
-export const JSONLoader: ContentItemLoader = async (
+export const JSONLoader: ContentItemLoader = async <T>(
   url: string
-): Promise<any> => {
-  return new Promise<any>((resolve, reject) => {
+): Promise<T> => {
+  return new Promise<T>((resolve, reject) => {
     window.fetch(url, {
       method: 'GET',
       headers: {

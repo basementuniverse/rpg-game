@@ -1,7 +1,7 @@
 import JSONSchemaValidator from 'ajv';
 import * as _contentManifest from '../../content/content.json';
 import * as constants from '../constants';
-import { FontLoader, ImageLoader, JSONLoader, SoundLoader } from '../content';
+import { EntityDataLoader, FontLoader, ImageLoader, SoundLoader } from '../content';
 import { ContentItemType } from '../enums';
 import * as utilities from '../utilities';
 
@@ -21,7 +21,7 @@ const contentItemLoaders: {
   [ContentItemType.Image]: ImageLoader,
   [ContentItemType.Sound]: SoundLoader,
   [ContentItemType.Font]: FontLoader,
-  [ContentItemType.JSON]: JSONLoader,
+  [ContentItemType.EntityData]: EntityDataLoader,
 };
 
 export default class Content {
