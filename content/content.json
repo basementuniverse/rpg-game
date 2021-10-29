@@ -18,7 +18,7 @@
     {
       "name": "menu_title",
       "type": "image",
-      "args": ["content/images/parchment_banner.png"]
+      "args": ["content/images/banner_large.png"]
     },
     {
       "name": "menu_button",
