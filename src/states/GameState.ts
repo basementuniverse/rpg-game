@@ -1,3 +1,5 @@
+import Content from '../content/Content';
+import Entity, { EntityData } from '../entities/Entity';
 import EntityManager from '../entities/EntityManager';
 import State from './State';
 
@@ -11,6 +13,13 @@ export class GameState extends State {
 
   public initialise(): void {
     this.entityManager.initialise();
+
+    // trying out a test entity...
+    const testEntityData = Content.get<EntityData>('testEntity');
+    console.log(testEntityData);
+    const testEntity = Entity.fromData(testEntityData);
+    console.log(testEntity);
+    this.entityManager.addEntity(testEntity);
   }
 
   public update(dt: number): void {

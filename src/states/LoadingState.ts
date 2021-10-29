@@ -4,8 +4,7 @@ import Content from '../content/Content';
 import { StateTransitionType } from '../enums';
 import Game from '../Game';
 import { ProgressBar } from '../ui/components';
-import { IntroState } from '.';
-import { MainMenuState } from './MainMenuState';
+import { GameState, IntroState, MainMenuState } from '.';
 import State from './State';
 import StateManager from './StateManager';
 
@@ -45,10 +44,12 @@ export class LoadingState extends State {
     if (this.cooldownTime <= 0) {
       StateManager.pop();
       setTimeout(() => {
-        const nextState = constants.SKIP_INTRO
-          ? new MainMenuState()
-          : new IntroState();
-        StateManager.push(nextState);
+        // TODO loading state goes to intro or main menu state
+        // const nextState = constants.SKIP_INTRO
+        //   ? new MainMenuState()
+        //   : new IntroState();
+        // StateManager.push(nextState);
+        StateManager.push(new GameState());
       }, LoadingState.INTRO_DELAY * 1000);
     }
   }

@@ -1,4 +1,3 @@
-import Content from '../content/Content';
 import Entity from './Entity';
 import System from './systems/System';
 
@@ -13,8 +12,6 @@ export default class EntityManager {
 
   public initialise(): void {
     // initialise systems...
-    const test = Content.get<EntityData>('testEntity');
-    console.log(test);
   }
 
   public addEntity(entity: Entity): void {
