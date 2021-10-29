@@ -7,10 +7,3 @@ declare module 'worker-loader!*' {
 }
 
 declare type Colour = string;
-
-declare type ContentItemLoader = <T>(...args: string[]) => Promise<T>;
-
-declare type EntityData = {
-  id: string;
-  name: string;
-};

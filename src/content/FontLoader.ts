@@ -1,3 +1,5 @@
+import { ContentItemLoader } from './Content';
+
 export const FontLoader: ContentItemLoader = async <FontFace>(
   url: string,
   family: string

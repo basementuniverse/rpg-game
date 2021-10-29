@@ -1,3 +1,5 @@
+import { ContentItemLoader } from './Content';
+
 export const ImageLoader: ContentItemLoader = async <HTMLImageElement>(
   url: string
 ): Promise<HTMLImageElement> => {

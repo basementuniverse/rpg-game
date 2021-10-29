@@ -1,5 +1,7 @@
+import { ContentItemLoader } from './Content';
+
 export const JSONLoader: ContentItemLoader = async <T>(
-  url: string
+  url: string 
 ): Promise<T> => {
   return new Promise<T>((resolve, reject) => {
     window.fetch(url, {

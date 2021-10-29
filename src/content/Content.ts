@@ -15,6 +15,8 @@ type ContentManifest = {
   items: ContentItem[];
 };
 
+export type ContentItemLoader = <T>(...args: string[]) => Promise<T>;
+
 const contentItemLoaders: {
   [key in ContentItemType]: ContentItemLoader;
 } = {
@@ -65,6 +67,7 @@ export default class Content {
           },
         },
       },
+      additionalProperties: false,
     });
     if (!validate(contentManifest)) {
       constants.DEBUG && console.log(validate.errors);
