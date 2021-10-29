@@ -6,6 +6,12 @@ module.exports = {
   mode: process.env.NODE_ENV || 'development',
   entry: './src/index.ts',
   devtool: 'inline-source-map',
+  watchOptions: {
+    aggregateTimeout: 500,
+    ignored: [
+      '**/node_modules',
+    ],
+  },
   module: {
     rules: [
       {

@@ -6,6 +6,7 @@
     "lint": "npx eslint 'src/**/*.ts'",
     "lint-fix": "npm run lint -- --fix",
     "build": "webpack",
+    "watch": "webpack --watch",
     "start": "http-server -a localhost -p 8080 -o index.html"
   },
   "author": "Gordon Larrigan <gordonlarrigan@gmail.com> (https://gordonlarrigan.com)",
