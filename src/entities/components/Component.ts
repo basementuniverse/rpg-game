@@ -12,7 +12,13 @@ export const ComponentDataSchema = {
 };
 
 export default abstract class Component {
-  private name: string;
+  public constructor(
+    public name: string
+  ) {}
 
-  public constructor() {}
+  protected serialize(): ComponentData {
+    return {
+      name: this.name,
+    };
+  }
 }

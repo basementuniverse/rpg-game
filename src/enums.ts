@@ -44,3 +44,9 @@ export enum Anchor {
   BottomCenter,
   BottomRight,
 }
+
+export enum ComponentComparisonType {
+  Some,
+  All,
+  None,
+}

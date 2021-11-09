@@ -10,12 +10,12 @@ completedColumns:
 ## Todo
 
 - [camera](tasks/camera.md)
-- [entity-component-system](tasks/entity-component-system.md)
+- [menu-system](tasks/menu-system.md)
 - [world-format](tasks/world-format.md)
 
 ## In Progress
 
-- [menu-system](tasks/menu-system.md)
+- [entity-component-system](tasks/entity-component-system.md)
 
 ## Done
 

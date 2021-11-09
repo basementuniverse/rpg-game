@@ -18,16 +18,22 @@ export default class StateManager {
     return StateManager.instance;
   }
 
+  /**
+   * Push a state onto the state stack and start transitioning in
+   */
   public static push(state: State): State {
     const instance = StateManager.getInstance();
     instance.states.push(state);
 
-    // Initialise the state and start transitioning in
+    // Initialise the state and start the transition
     state.initialise();
     state.transitionIn();
     return state;
   }
 
+  /**
+   * Remove a state from the state stack after transitioning out
+   */
   public static pop(): State | null {
     const instance = StateManager.getInstance();
     if (instance.states.length > 0) {
@@ -48,6 +54,9 @@ export default class StateManager {
     return null;
   }
 
+  /**
+   * Remove all states
+   */
   public static clear(): void {
     const instance = StateManager.getInstance();
     instance.states.forEach(state => {

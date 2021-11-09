@@ -26,6 +26,8 @@ export class MainMenuState extends State {
     this.titleBanner = new Image('menu_title');
     this.testMenuItem = new MenuItem('Test Button');
 
+    // TODO main menu
+
     this.testWorker = new GameWorker();
     this.testWorker.postMessage('menu');
     this.testWorker.postMessage('test');

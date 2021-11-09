@@ -39,9 +39,13 @@ export class LoadingState extends State {
     this.progressBar.progress = Content.progress;
     this.progressBar.update(dt);
     if (this.finishedLoadingContent) {
+      console.log('finished loading');
       this.cooldownTime -= dt;
     }
+
+    // TODO remove cooldownTime, finish when the loading bar reaches 100%
     if (this.cooldownTime <= 0) {
+      console.log('finished cooldown');
       StateManager.pop();
       setTimeout(() => {
         // TODO loading state goes to intro or main menu state

@@ -1,4 +1,5 @@
 import * as uuid from 'uuid-random';
+import { ComponentComparisonType } from '../enums';
 import Component, { ComponentData, ComponentDataSchema } from './components/Component';
 
 export type EntityData = {
@@ -25,27 +26,59 @@ export const EntityDataSchema = {
 };
 
 export default class Entity {
-  private id: string;
-  private components: Record<string, Component>;
+  public id: string;
+  public name: string;
+  public components: Record<string, Component>;
 
   public constructor(
-    // id: string
+    id: string | null,
+    name: string
   ) {
-    this.id = uuid();
+    this.id = id ?? uuid();
+    this.name = name;
     this.components = {};
   }
 
-  public static fromData(data: EntityData): Entity {
-    // TODO
-    return new Entity();
+  /**
+   * Add a component to this entity
+   */
+  public addComponent(component: Component): void {
+    this.components[component.name] = component;
   }
 
-  // public addComponent(component: Component): void {
-  //   // component.entity = this;
-  //   // push component if not exists
-  // }
+  /**
+   * Remove a component from this entity
+   */
+  public removeComponent(component: Component): void {
+    if (component.name in this.components) {
+      delete this.components[component.name];
+    }
+  }
 
-  // public removeComponent(component: Component): void {
-  //   // splice component if exists
-  // }
+  /**
+   * Check if this entity contains some/all/none of the specified component types
+   */
+  public hasComponents(
+    comparisonType: ComponentComparisonType,
+    ...componentNames: string[]
+  ): boolean {
+    const components = Object.keys(this.components);
+    switch (comparisonType) {
+      case ComponentComparisonType.All:
+        return componentNames.every(
+          componentName => components.includes(componentName)
+        );
+      case ComponentComparisonType.Some:
+        return componentNames.some(
+          componentName => components.includes(componentName)
+        );
+      case ComponentComparisonType.None:
+        return !componentNames.some(
+          componentName => components.includes(componentName)
+        );
+      default:
+        break;
+    }
+    return false;
+  }
 }
