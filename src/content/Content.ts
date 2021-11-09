@@ -60,7 +60,7 @@ export default class Content {
               args: {
                 type: 'array',
                 items: {
-                  type: 'string',
+                  type: ['string', 'object', 'array'],
                 },
               },
             },

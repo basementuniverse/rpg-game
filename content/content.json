@@ -44,6 +44,33 @@
       "name": "testEntity",
       "type": "entityData",
       "args": ["content/json/testEntity.json"]
+    },
+    {
+      "name": "testEntity2",
+      "type": "entityData",
+      "args": [
+        {
+          "id": "test-id-2",
+          "name": "Test Name 2",
+          "components": [
+            {
+              "name": "transforms",
+              "position": {
+                "x": 200,
+                "y": 140
+              },
+              "size": {
+                "x": 30,
+                "y": 50
+              }
+            },
+            {
+              "name": "sprite",
+              "tempColour": "green"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
