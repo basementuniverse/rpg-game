@@ -1,6 +1,6 @@
 import { vec } from '@basementuniverse/commonjs';
 import { Anchor } from '../../enums';
-import { roundedRectangle } from '../../utilities';
+import roundedRectangle from '../../utilities/roundedRectangle';
 import Component, { ComponentOptions } from './Component';
 
 type ProgressBarOptions = ComponentOptions & {

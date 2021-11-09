@@ -3,7 +3,7 @@ import * as _contentManifest from '../../content/content.json';
 import * as constants from '../constants';
 import { EntityDataLoader, FontLoader, ImageLoader, SoundLoader } from '../content';
 import { ContentItemType } from '../enums';
-import * as utilities from '../utilities';
+import sleep from '../utilities/sleep';
 
 type ContentItem = {
   name: string;
@@ -83,6 +83,9 @@ export default class Content {
     return Content.instance;
   }
 
+  /**
+   * Start loading content items defined in the content manifest
+   */
   public static async load(): Promise<void> {
     if (Content.loaded) {
       throw new Error('Content already loaded');
@@ -94,7 +97,7 @@ export default class Content {
     const progressDelta = 1 / instance.content.length;
     for (const c of instance.content) {
       if (constants.DEBUG && constants.SIMULATE_SLOW_LOADING) {
-        await utilities.sleep(Math.randomBetween(100, 1000));
+        await sleep(Math.randomBetween(100, 1000));
       }
       instance.items[c.name] = await contentItemLoaders[c.type](...c.args);
       Content.progress = Math.clamp(Content.progress + progressDelta, 0, 1);
@@ -102,6 +105,9 @@ export default class Content {
     Content.loaded = true;
   }
 
+  /**
+   * Fetch a loaded content item
+   */
   public static get<T>(name: string): T {
     if (!Content.loaded) {
       throw new Error('Content not loaded');

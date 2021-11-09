@@ -1,16 +1,9 @@
 import { vec } from '@basementuniverse/commonjs';
 
 /**
- * Pause execution for some number of milliseconds
- */
-export function sleep(ms: number): Promise<void> {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-/**
  * Draw a rounded rectangle path
  */
-export function roundedRectangle(
+export default function roundedRectangle(
   context: CanvasRenderingContext2D,
   position: vec,
   size: vec,
