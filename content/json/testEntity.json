@@ -1,6 +1,6 @@
 {
-  "id": "test-id",
-  "name": "Test Name",
+  "id": "test-entity",
+  "name": "Test Entity",
   "components": [
     {
       "name": "transforms",

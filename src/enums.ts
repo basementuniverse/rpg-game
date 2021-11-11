@@ -3,6 +3,7 @@ export enum ContentItemType {
   Sound = 'sound',
   Font = 'font',
   EntityData = 'entityData',
+  MapData = 'mapData',
 }
 
 export enum StateTransitionType {

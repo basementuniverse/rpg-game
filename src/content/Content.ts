@@ -4,6 +4,7 @@ import * as constants from '../constants';
 import { EntityDataLoader, FontLoader, ImageLoader, SoundLoader } from '../content';
 import { ContentItemType } from '../enums';
 import sleep from '../utilities/sleep';
+import { MapDataLoader } from './MapDataLoader';
 
 type ContentItem = {
   name: string;
@@ -24,6 +25,7 @@ const contentItemLoaders: {
   [ContentItemType.Sound]: SoundLoader,
   [ContentItemType.Font]: FontLoader,
   [ContentItemType.EntityData]: EntityDataLoader,
+  [ContentItemType.MapData]: MapDataLoader,
 };
 
 export default class Content {

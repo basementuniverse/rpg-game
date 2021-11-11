@@ -1,8 +1,8 @@
 import { ContentItemLoader } from './Content';
 
-export const SoundLoader: ContentItemLoader = async <HTMLAudioElement>(
+export const SoundLoader: ContentItemLoader = async (
   url: string
-): Promise<HTMLAudioElement> => {
+): Promise<any> => {
   return new Promise<HTMLAudioElement>((resolve, reject) => {
     const sound = new Audio(url);
     sound.addEventListener('loadeddata', () => {

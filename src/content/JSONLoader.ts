@@ -1,6 +1,6 @@
 import { ContentItemLoader } from './Content';
 
-export const JSONLoader: ContentItemLoader = async <T>(
+export const JSONLoader: ContentItemLoader = async <T extends Record<string, any>>(
   urlOrData: any
 ): Promise<T> => {
   if (typeof urlOrData === 'string') {

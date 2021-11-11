@@ -44,6 +44,11 @@
       "name": "testEntity",
       "type": "entityData",
       "args": ["content/json/testEntity.json"]
+    },
+    {
+      "name": "testMap",
+      "type": "mapData",
+      "args": ["content/json/testMap.json"]
     }
   ]
 }

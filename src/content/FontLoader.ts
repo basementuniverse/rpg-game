@@ -1,9 +1,9 @@
 import { ContentItemLoader } from './Content';
 
-export const FontLoader: ContentItemLoader = async <FontFace>(
+export const FontLoader: ContentItemLoader = async (
   url: string,
   family: string
-): Promise<FontFace> => {
+): Promise<any> => {
   return new Promise<FontFace>((resolve, reject) => {
     const font = new FontFace(family, `url(${url})`);
     font.load()

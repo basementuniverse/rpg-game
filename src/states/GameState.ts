@@ -2,6 +2,8 @@ import Content from '../content/Content';
 import { EntityData } from '../entities/Entity';
 import EntityFactory from '../entities/EntityFactory';
 import EntityManager from '../entities/EntityManager';
+import { MapData } from '../world/Map';
+import MapFactory from '../world/MapFactory';
 import State from './State';
 
 export class GameState extends State {
@@ -21,6 +23,8 @@ export class GameState extends State {
         Content.get<EntityData>('testEntity')
       )
     );
+
+    console.log(MapFactory.fromData(Content.get<MapData>('testMap')));
   }
 
   public update(dt: number): void {
