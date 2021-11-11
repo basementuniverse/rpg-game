@@ -16,7 +16,7 @@ export default abstract class Component {
     public name: string
   ) {}
 
-  protected serialize(): ComponentData {
+  public serialize(): ComponentData {
     return {
       name: this.name,
     };

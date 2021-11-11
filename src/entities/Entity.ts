@@ -81,4 +81,14 @@ export default class Entity {
     }
     return false;
   }
+
+  public serialize(): EntityData {
+    return {
+      id: this.id,
+      name: this.name,
+      components: Object
+        .values(this.components)
+        .map(c => c.serialize()),
+    };
+  }
 }
