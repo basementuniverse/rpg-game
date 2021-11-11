@@ -21,11 +21,6 @@ export class GameState extends State {
         Content.get<EntityData>('testEntity')
       )
     );
-    this.entityManager.addEntity(
-      EntityFactory.fromData(
-        Content.get<EntityData>('testEntity2')
-      )
-    );
   }
 
   public update(dt: number): void {
