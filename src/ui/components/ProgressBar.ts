@@ -21,7 +21,7 @@ export class ProgressBar extends Component {
   protected readonly defaultOptions: ProgressBarOptions = {
     anchor: Anchor.Center,
     size: vec(120, 14),
-    ease: 0.9,
+    ease: 1.25,
     padding: 4,
     borderColour: '#b75',
     borderWidth: 2,

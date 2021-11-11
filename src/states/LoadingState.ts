@@ -10,8 +10,7 @@ import StateManager from './StateManager';
 
 export class LoadingState extends State {
   private static readonly TRANSITION_TIME: number = 0.5;
-  private static readonly COOLDOWN_TIME: number = 3;
-  private static readonly INTRO_DELAY: number = 1;
+  private static readonly COOLDOWN_TIME: number = 2.5;
 
   private finishedLoadingContent: boolean;
   private progressBar: ProgressBar;
@@ -39,22 +38,17 @@ export class LoadingState extends State {
     this.progressBar.progress = Content.progress;
     this.progressBar.update(dt);
     if (this.finishedLoadingContent) {
-      console.log('finished loading');
       this.cooldownTime -= dt;
     }
 
-    // TODO remove cooldownTime, finish when the loading bar reaches 100%
     if (this.cooldownTime <= 0) {
-      console.log('finished cooldown');
       StateManager.pop();
-      setTimeout(() => {
-        // TODO loading state goes to intro or main menu state
-        // const nextState = constants.SKIP_INTRO
-        //   ? new MainMenuState()
-        //   : new IntroState();
-        // StateManager.push(nextState);
-        StateManager.push(new GameState());
-      }, LoadingState.INTRO_DELAY * 1000);
+      // TODO loading state goes to main menu or intro
+      // const nextState = constants.SKIP_INTRO
+      //   ? new MainMenuState()
+      //   : new IntroState();
+      // StateManager.push(nextState);
+      StateManager.push(new GameState());
     }
   }
 
